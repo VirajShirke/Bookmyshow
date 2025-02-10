@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies - BookMyShow</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .movie {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .movie-details {
+            flex-grow: 1;
+        }
+        .btn-book {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-book:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>BookMyShow - Movies</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Sign Up</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h2>Available Movies</h2>
+
+    {% if movies %}
+        {% for movie in movies %}
+            <div class="movie">
+                <div class="movie-details">
+                    <h3>{{ movie[1] }}</h3>  <!-- Assuming title is the second column -->
+                    <p>Genre: {{ movie[2] }}</p>  <!-- Assuming genre is the third column -->
+                    <p>Release Date: {{ movie[3] }}</p>  <!-- Assuming release date is the fourth column -->
+                </div>
+                <a href="{{ url_for('book', movie_id=movie[0]) }}" class="btn-book">Book Tickets</a>  <!-- Assuming id is the first column -->
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No movies available at this time.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
